@@ -79,6 +79,7 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
 
 # Links
+* http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
 * http://arstechnica.com/information-technology/2014/01/bitrot-and-atomic-cows-inside-next-gen-filesystems/
 * https://static.googleusercontent.com/media/research.google.com/fi//archive/disk_failures.pdf
 * https://en.wikipedia.org/wiki/Data_degradation
