@@ -1,20 +1,22 @@
-# Building NAS with ZFS
+# Building NAS for home use with ZFS
 **(under construction)**
+
 First off: **RAID IS NOT A BACKUP!**
 
-How to build NAS? What type of hazards are there? 
-Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back.
+How to build your own NAS for home use which doesn't break immediately? What type of hazards are there? 
+Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. Also do not use cheap components, especially PSU. Never use non-ECC RAM.
 
 # Setup
 * No hardware RAID
 * ZFS as filesystem
 * RaidZ2 (aka RAID6) (2 drives can fail) or RaidZ3 (3 drives can fail)
 * ECC memory only
-* Redundant power
+* Redundant power supply
 * Multiple SAS/SATA expanders against data loss
 * Rack mount case with 24 x 5.25" bays
-* UPSes
-* OS hard drive is seperated 
+* UPSes for PSUs
+* OS hard drive is seperated
+* Good quality components
  
 # Outside hazards
 * Thunderstorm
@@ -63,10 +65,15 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 * ZFS scrub
 * SMART tests
 * Backup checking 
-  * 
   * Restore process
 * RAM check
 * I/O performance check
+
+# Non-regular maintenance
+* Change PSU(s)
+* Update BIOS
+* Update HW firmware
+* Change 3-4 year old hard drives to new ones
 
 # Why ECC memory?
 Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
