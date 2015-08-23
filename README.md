@@ -22,6 +22,8 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 * Thunderstorm
 * Power loss
 * Fire
+* Water
+* Humidity
 * Room too hot
 * Room too cold
 
@@ -33,6 +35,7 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 * Backplane failure
 * Hard drive failure
 * Not knowing about harware what is used
+* Dust 
  
 # Software hazards
 * Viruses
@@ -68,6 +71,7 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
   * Restore process
 * RAM check
 * I/O performance check
+* Remove dust from drive bays, CPU heatsink(s), motherboard heatsink(s), PSU(s) and cards
 
 # Non-regular maintenance
 * Change PSU(s)
@@ -77,6 +81,9 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 
 # Why ECC memory?
 Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
+
+# Hard drives
+Hard disks will break sooner if temperature changes too much.
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
