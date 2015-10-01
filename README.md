@@ -104,6 +104,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 ## Buying hardware
 * Product is not genuine
   * Example: cheap "new" LSI 9211-8i HBA's from china in ebay aren't usually genuine hardware and won't work
+  * Serial number might not be valid, so ask for serial number to confirm genuine product from manufacturer
 
 ## SAS Controllers
 * Some controllers may be limiting hard drive sizes to for example 2 TB max
@@ -127,6 +128,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some expanders may not work on non-manufacturer motherboard
 * Some expanders may need controller from the same manufacturer for you to be able to update the expander card's firmware
 * Some expanders may not support hot-swap 
+* Some expanders may not support double bandwidth (two cables from expander to controller) if the controller's manufacturer is not the same as expanders
 * Cable might be faulty
 * Cable going to backplane or controller might be wrong type
 
