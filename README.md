@@ -158,6 +158,9 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * PSUs will lose power capacity over time
 * PSU close to full capacity will degrade faster 
 
+## Uninterruptible Power Supply (UPS)
+* UPS close to full capacity will wear out battery/batteries and UPS' own PSU faster 
+ 
 # RAID levels
 ## RAID 0
 The zero stands for how many files you will recover if any of the drives fails. Do not use.
