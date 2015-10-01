@@ -11,7 +11,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * RaidZ2 (aka RAID6) (2 drives can fail) or RaidZ3 (3 drives can fail)
 * ECC memory only
 * Redundant power supply
-* Multiple SAS/SATA expanders against data loss
+* Multiple SAS/SATA controllers against data loss
 * Rack mount case with 24 x 5.25" bays
 * UPSes for PSUs
 * OS hard drive is seperated
@@ -31,6 +31,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * Not using ECC memory
 * PSU failure
 * Motherboard failure
+* Cheap SAS cables
 * SAS/SATA expander card failure
 * SAS/SATA controller card failure
 * Backplane failure
@@ -103,6 +104,8 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
   * Example: Dell H310 may need certain pins on PCI-e slot to be blocked
 * Some controller may be incompatible with operating system or operating system's version
 * Some controller's firmware may be incompatible with operating system or operating system's version
+* Cable might be faulty
+* Cable going to expander or backplane might be wrong type
 
 ## SAS Expanders
 * Some expanders may be limiting hard drive sizes to for example 2 TB max
@@ -111,10 +114,27 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some expanders may not work on lower speed PCI-e or other slot
 * Some expanders may not work on non-manufacturer motherboard
 * Some expanders may need controller from the same manufacturer for you to be able to update the expander card's firmware
+* Cable might be faulty
+* Cable going to backplane or controller might be wrong type
+
+## Backplanes
+* Backplane may not receive enough power from PSU's power rail
+* Some backplanes may have SAS expander(s) built-in
+* Some backplanes may not support SATA hard drives, only SAS drives
+* Cable might be faulty
+* Cable going to SAS Expander or controller might be wrong type
 
 ## Hard drives
 * Some drives may have faulty firmware
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
+
+## Operating system
+* OS may have driver bug for SAS controller
+* OS may have driver bug for SAS controller's firmware
+* ZFS implementation might have a bug
+ 
+## Motherboard
+* Motherboard might have IRQ conflict issue that hangs computer or slows it down
 
 # RAID levels
 ## RAID 0
