@@ -98,6 +98,10 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 
 # What to check for possible problems
 
+## Buying hardware
+* Product is not genuine
+  * Example: cheap "new" LSI 9211-8i HBA's from china in ebay aren't usually genuine hardware and won't work
+
 ## SAS Controllers
 * Some controllers may be limiting hard drive sizes to for example 2 TB max
   * Example: LSI 1068E limits drive size to 2 TB
