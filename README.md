@@ -162,7 +162,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 ## Hard drives
 * Some drives may have faulty firmware
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
-* Drives are connected to backplane so that controller failure can corrupt the whole pool
+* Drives are connected to backplane so that controller or expander failure can corrupt the whole pool
 * Drives that have been spinning for years may not be able to start spinning again
 
 ## Operating system
@@ -186,10 +186,13 @@ The zero stands for how many files you will recover if any of the drives fails. 
 ## Mirror aka RAID 1
 Two or more disks will have exact copy of one disk. Recommended.
 ## RAIDz aka RAID 5
-Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. Also include the time it takes to transfer the files from backup to new pool.
+Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole raidz pool the extra drive's cost is very quickly paid back. Also include the time it takes to transfer the files from backup to new pool.
 ## RAIDz2 aka RAID 6
 Two drives can fail. Recommended.
 
+# Network card and bandwidth
+* If you want more than 1 Gbps speed with multiple 1 Gbps cards for example between NAS - network switch - your PC then your NAS, switch and PC must support link aggregation (LACP)
+  * Depending on the NIC and OS used the NICs usually have to be same cards from same manufacturer
 
 
 # Links
