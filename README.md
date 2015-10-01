@@ -89,6 +89,25 @@ Your data needs to be written only once to storage as broken and then it will be
 # Why you must use UPS (Uninterruptible Power Supply)
 All modern hard drives contains caching. Almost all hard drive manufacturers build hard drives so that it lies to the operating system that data is written. So operating system and filesystem will mark data as written but in actuality it is still in writing process to the hard drive from cache. If power loss occurs at this writing time the data is lost. UPS gives hard drive time to finish writing this data to the disk. In some drives you can disable caching. This makes the disk very slow to write to. Also depending on your SAS/SATA controller, expander and backplane it is possible that some of these components blocks sending all instructions to hard drives. Most common one is that SMART data is blocked. So check that all your components can send and receive raw hard drive data before buying components.
 
+# Problems
+
+## SAS Controllers
+* Some controllers may be limiting hard drive sizes to for example 2 TB max
+  * Example: LSI 1068E limits drive size to 2 TB
+* Some controllers may be limiting total size beeing seen of connected drives to for example 256 TB max
+* Some controllers may not work on higher speed PCI-e or other slot
+* Some controllers may not work on lower speed PCI-e or other slot
+* Some controllers might 
+
+## SAS Expanders
+* Some expanders may be limiting hard drive sizes to for example 2 TB max
+* Some expanders may be limiting total size beeing seen of connected drives to for example 256 TB max
+* Some expanders may not work on higher speed PCI-e or other slot
+* Some expanders may not work on lower speed PCI-e or other slot
+
+## Hard drives
+* Some drives may have faulty firmware
+  * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
