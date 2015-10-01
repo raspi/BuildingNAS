@@ -89,6 +89,25 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 # Why ECC memory?
 Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
 
+# Why hardware RAID is bad?
+* Hardware RAID doesn't protect against bit rot aka silent corruption
+  * Over the years disks will return wrong data
+    * In ZFS when data is written to disk, also a checksum is written. ZFS scrub checks the data against the checksum and will know if file content is broken. ZFS will correct this problem silently without the need for any additional tools. Same silent fixing will happen if user just reads data and scrub isn't running. This is why ECC RAM is so important.
+* Raw passthrough to drives is often limited or prohibited completely or you have to use card manufacturer's own tools 
+  * SMART data is very useful for getting information of early failure
+  * All SCSI commands should pass so that OS can provide you with all information in failure cases
+* Some RAID levels use propietary algorithms (usually RAID6 and some others too)
+  * Example: Card dies and card manufacturer has gone bankrupt; you can't access the data with other manufacturer's RAID card because the algorithm used is different
+* Information written to disks is propietary
+  * You can't access the disk with other manufacturer's card
+* Information written to disks is location aware in some cards
+  * Example: moving drive from bay #1 to #2 and vice versa, then card may think that everything is broken
+* After changing to new drive after failure the whole disk is written full of data and rebuilding may take days to complete
+  * ZFS equivalent, resilvering, only writes necessary used data to new drive and is much faster
+* Hard to add new drives
+* Configuring array might need booting to card's own configuration utility
+* If power loss occurs when using for example RAID 5 and card's battery has died (or even worse: there's no battery) whole array will go out of sync and may not be recoverable or might need full rebuild which again may take many days
+
 # Hard drives
 * Hard disks will break sooner if temperature changes too much
 * SAS drives are better for retrying failed data access; SATA drives usually freezes the whole system
@@ -167,9 +186,11 @@ The zero stands for how many files you will recover if any of the drives fails. 
 ## Mirror aka RAID 1
 Two or more disks will have exact copy of one disk. Recommended.
 ## RAIDz aka RAID 5
-Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. 
+Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. Also include the time it takes to transfer the files from backup to new pool.
 ## RAIDz2 aka RAID 6
 Two drives can fail. Recommended.
+
+
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
