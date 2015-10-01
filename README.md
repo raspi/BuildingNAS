@@ -13,7 +13,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * ECC memory only
 * Redundant power supply
 * Multiple SAS controllers against data loss
-* Rack mount case with 24 x 5.25" bays
+* Rack mount case with 24 x 3.5" bays
 * UPSes for PSUs
 * OS hard drive is seperated
 * Good quality components
