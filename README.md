@@ -4,7 +4,6 @@
 First off: **RAID IS NOT A BACKUP!**
 
 How to build your own NAS for home use which doesn't break immediately? What type of hazards are there? 
-Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. Also do not use cheap components, especially PSU. Never use non-ECC RAM.
 
 # Setup
 * No hardware RAID
@@ -28,6 +27,8 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 * Room too cold
 
 # Hardware hazards
+* Cheap components
+* Not using ECC memory
 * PSU failure
 * Motherboard failure
 * SAS/SATA expander card failure
@@ -36,6 +37,7 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 * Hard drive failure
 * Not knowing about harware what is used
 * Dust 
+* Moisture
  
 # Software hazards
 * Viruses
@@ -89,7 +91,7 @@ Your data needs to be written only once to storage as broken and then it will be
 # Why you must use UPS (Uninterruptible Power Supply)
 All modern hard drives contains caching. Almost all hard drive manufacturers build hard drives so that it lies to the operating system that data is written. So operating system and filesystem will mark data as written but in actuality it is still in writing process to the hard drive from cache. If power loss occurs at this writing time the data is lost. UPS gives hard drive time to finish writing this data to the disk. In some drives you can disable caching. This makes the disk very slow to write to. Also depending on your SAS/SATA controller, expander and backplane it is possible that some of these components blocks sending all instructions to hard drives. Most common one is that SMART data is blocked. So check that all your components can send and receive raw hard drive data before buying components.
 
-# Problems
+# What to check for possible problems
 
 ## SAS Controllers
 * Some controllers may be limiting hard drive sizes to for example 2 TB max
@@ -97,17 +99,32 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some controllers may be limiting total size beeing seen of connected drives to for example 256 TB max
 * Some controllers may not work on higher speed PCI-e or other slot
 * Some controllers may not work on lower speed PCI-e or other slot
-* Some controllers might 
+* Some controllers may not work if the motherboard is not from same manufacturer
+  * Example: Dell H310 may need certain pins on PCI-e slot to be blocked
+* Some controller may be incompatible with operating system or operating system's version
+* Some controller's firmware may be incompatible with operating system or operating system's version
 
 ## SAS Expanders
 * Some expanders may be limiting hard drive sizes to for example 2 TB max
 * Some expanders may be limiting total size beeing seen of connected drives to for example 256 TB max
 * Some expanders may not work on higher speed PCI-e or other slot
 * Some expanders may not work on lower speed PCI-e or other slot
+* Some expanders may not work on non-manufacturer motherboard
+* Some expanders may need controller from the same manufacturer for you to be able to update the expander card's firmware
 
 ## Hard drives
 * Some drives may have faulty firmware
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
+
+# RAID levels
+## RAID 0
+The zero stands for how many files you will recover if any of the drives fails. Do not use.
+## Mirror aka RAID 1
+Two or more disks will have exact copy of one disk. Recommended.
+## RAIDz aka RAID 5
+Do not use raidz aka RAID5. It is just not worth it. After one drive fails and new is inserted it is quite common to see another drive break during resilvering (rebuilding). If you calculate amount of hard drive cost versus time spent used trying to fix and probably lose whole RAID5 pool the extra drive's cost is very quickly paid back. 
+## RAIDz2 aka RAID 6
+Two drives can fail. Recommended.
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
@@ -115,3 +132,4 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * https://static.googleusercontent.com/media/research.google.com/fi//archive/disk_failures.pdf
 * https://en.wikipedia.org/wiki/Data_degradation
 * https://www.youtube.com/watch?v=yAuEgepZG_8
+* http://www.zdnet.com/article/why-raid-5-stops-working-in-2009/
