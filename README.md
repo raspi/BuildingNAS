@@ -83,7 +83,8 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
 
 # Hard drives
-Hard disks will break sooner if temperature changes too much.
+* Hard disks will break sooner if temperature changes too much
+* SAS drives are better for retrying failed data access; SATA drives usually freezes the whole system
 
 # Why you must use UPS (Uninterruptible Power Supply)
 All modern hard drives contains caching. Almost all hard drive manufacturers build hard drives so that it lies to the operating system that data is written. So operating system and filesystem will mark data as written but in actuality it is still in writing process to the hard drive from cache. If power loss occurs at this writing time the data is lost. UPS gives hard drive time to finish writing this data to the disk. In some drives you can disable caching. This makes the disk very slow to write to. Also depending on your SAS/SATA controller, expander and backplane it is possible that some of these components blocks sending all instructions to hard drives. Most common one is that SMART data is blocked. So check that all your components can send and receive raw hard drive data before buying components.
