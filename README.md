@@ -144,6 +144,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some drives may have faulty firmware
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
 * Drives are connected to backplane so that controller failure can corrupt the whole pool
+* Drives that have been spinning for years may not be able to start spinning again
 
 ## Operating system
 * OS may have driver bug for SAS controller
@@ -152,6 +153,10 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
  
 ## Motherboard
 * Motherboard might have IRQ conflict issue that hangs computer or slows it down
+ 
+## Power Supply Unit (PSU)
+* PSUs will lose power capacity over time
+* PSU close to full capacity will degrade faster 
 
 # RAID levels
 ## RAID 0
