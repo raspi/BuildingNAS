@@ -53,10 +53,11 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 # Hardware setup
 * Motherboard
 * ECC RAM
+  * Use 1 GB of RAM per 1 TB of storage space
 * 3 (or more) x SAS expander cards (1 x MiniSAS port for backplane which has 4 slots for SAS/SATA HDDs)
   * RAID6 can lose 2 HDDs
-  * Each drive are in different zpool per backplane so there are 4 different zpools
-  * If one expander card breaks then 2 backplanes are lost which is recoverable, as each zpools will lose 2 drives at once (8 drives total)
+  * Each drive are in different zpool per backplane so there are 4 different zpools or vdevs
+  * If one controller or expander card breaks then 2 backplanes are lost which is recoverable, as each zpool or vdev will lose 2 drives at once (8 drives total)
 * PSUs connected to two different UPSes against power loss
 * Extra spare drive(s) for HDD failure
 
@@ -75,11 +76,11 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * SMART tests
 * Backup checking 
   * Restore process
-* RAM check
 * I/O performance check
 * Remove dust from drive bays, CPU heatsink(s), motherboard heatsink(s), PSU(s) and cards
 
 # Non-regular maintenance
+* RAM check
 * Change PSU(s)
 * Update BIOS
 * Update HW firmware
@@ -87,7 +88,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * Change UPS battery
 
 # Why ECC memory?
-Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption.
+Your data needs to be written only once to storage as broken and then it will be broken forever. ECC memory protects against this type of corruption. RAM component(s) running too hot will also cause data corruption.
 
 # Why hardware RAID is bad?
 * Hardware RAID doesn't protect against bit rot aka silent corruption
@@ -197,6 +198,11 @@ Two drives can fail. Recommended.
 * If you want more than 1 Gbps speed with multiple 1 Gbps cards for example between NAS - network switch - your PC then your NAS, switch and PC must support link aggregation (LACP)
   * Depending on the NIC and OS used the NICs usually have to be same cards from same manufacturer
 
+# Samba aka CIFS aka Windows share
+* It is adviced to use `recycle` VFS object in the config file as it will move deleted files to other directory and thus prevents accidental file deletions
+  * Remember to test it!
+* You can block some files by using `veto files` option in the samba config file
+  * Example: Windows `Thumbs.db` files 
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
