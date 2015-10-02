@@ -15,7 +15,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * Multiple SAS controllers against data loss
 * Rack mount case with 24 x 3.5" bays
 * UPSes for PSUs
-* OS hard drive is seperated
+* OS boot drive is seperated
 * Good quality components
  
 # Outside hazards
@@ -52,12 +52,14 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 # Hardware setup
 * Motherboard
 * ECC RAM
+* CPU(s) supporting ECC RAM
 * 3 (or more) x SAS expander cards (1 x MiniSAS port for backplane which has 4 slots for SAS/SATA HDDs)
   * RAID6 can lose 2 HDDs
   * Each drive are in different zpool per backplane so there are 4 different zpools or vdevs
   * If one controller or expander card breaks then 2 backplanes are lost which is recoverable, as each zpool or vdev will lose 2 drives at once (8 drives total)
 * PSUs connected to two different UPSes against power loss
-* Extra spare drive(s) for HDD failure
+* Extra spare drive(s) against HDD failure
+* SSD drive or USB stick for OS
 
 # What to monitor
 * HDD SMART data
@@ -125,11 +127,17 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
   * Serial number might not be valid, so ask for serial number to confirm genuine product from manufacturer
 * Wrong kind of product
   * SAS breakout cables used for drives and controller looks alike but are different
-    * Forward breakout cable for connecting SATA connectors to drives
-    * Reverse breakout cable for connecting SATA connectors to SAS controller     
+     * **Forward** breakout cable for connecting SATA connectors to **drives**
+     * **Reverse** breakout cable for connecting SATA connectors to **SAS controller**
+  * Incompatible motherboard for enclosure  
+  * Incompatible PSU for enclosure 
+* Check options
+  * Check for bracket option(s) for bigger fan(s)      
+* Check space 
+  * Unable to close enclosure because heatsink or fan is too big    
 
 ## SAS Controllers
-* Some controllers may be limiting hard drive sizes to for example 2 TB max
+* Some controllers may be limiting hard drive sizes
   * Example: LSI 1068E limits drive size to 2 TB
 * Some controllers may be limiting total size beeing seen of connected drives to for example 256 TB max
 * Some controllers may not work on higher speed PCI-e or other slot
@@ -139,7 +147,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some controllers may not support hot-swap
 * Some controller may be incompatible with operating system or operating system's version
 * Some controller's firmware may be incompatible with operating system or operating system's version
-* Cable might be faulty
+* Cable may be faulty
 * Cable going to expander or backplane might be wrong type
 * Controller may be overheating
 
@@ -152,7 +160,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some expanders may need controller from the same manufacturer for you to be able to update the expander card's firmware
 * Some expanders may not support hot-swap 
 * Some expanders may not support double bandwidth (two cables from expander to controller) if the controller's manufacturer is not the same as expanders
-* Cable might be faulty
+* Cable may be faulty
 * Cable going to backplane or controller might be wrong type
 * Expander may be overheating
 
@@ -168,8 +176,9 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some drives may have faulty firmware
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
 * Drives are connected to backplane so that controller or expander failure can corrupt the whole pool
-* Drives that have been spinning for years may not be able to start spinning again
+* Drives that have been spinning for years may not be able to start spinning again after spin down
 * Drive may be overheating
+* Rarely brand new drive might die after just a few days or hours or not work at all
 
 ## Operating system
 * OS may have driver bug for SAS controller
@@ -177,7 +186,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * ZFS implementation might have a bug
  
 ## Motherboard
-* Motherboard might have IRQ conflict issue that hangs computer or slows it down
+* Motherboard may have IRQ conflict issue that hangs computer or slows it down
  
 ## Power Supply Unit (PSU)
 * PSUs will lose power capacity over time
@@ -185,6 +194,14 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 
 ## Uninterruptible Power Supply (UPS)
 * UPS close to full capacity will wear out battery/batteries and UPS' own PSU faster 
+
+## Fan noise
+* Rackmount enclosures are usually shipped with "turbine" fans
+* Some enclosures may have temperature sensors built-in where fans are plugged in 
+
+## Enclosure
+* Space between CPU and enclosure might be too small for heatsink or fan 
+  * Example: Noctua NH-D14 SE2011 is too big for 4U enclosure 
  
 # RAID levels
 ## RAID 0
@@ -196,15 +213,16 @@ Do not use raidz aka RAID5. It is just not worth it. After one drive fails and n
 ## RAIDz2 aka RAID 6
 Two drives can fail. Recommended.
 
-# Network card and bandwidth
-* If you want more than 1 Gbps speed with multiple 1 Gbps cards for example between NAS - network switch - your PC then your NAS, switch and PC must support link aggregation (LACP)
-  * Depending on the NIC and OS used the NICs usually have to be same cards from same manufacturer
-
-# Samba aka CIFS aka Windows share
+# Other notes
+## Samba aka CIFS aka Windows share
 * It is adviced to use `recycle` VFS object in the config file as it will move deleted files to other directory and thus prevents accidental file deletions
   * Remember to test it!
 * You can block some files by using `veto files` option in the samba config file
   * Example: Windows `Thumbs.db` files 
+
+## Network card and bandwidth
+* If you want more than 1 Gbps speed with multiple 1 Gbps cards for example between NAS - network switch - your PC then your NAS, switch and PC must support link aggregation (LACP)
+  * Depending on the NIC and OS used the NICs usually have to be same cards from same manufacturer
 
 # Links
 * http://www.solarisinternals.com/wiki/index.php/ZFS_Best_Practices_Guide
