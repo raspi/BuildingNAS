@@ -122,7 +122,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 
 ## Buying hardware
 * Product is not genuine
-  * Example: cheap "new" LSI 9211-8i HBA's from china in ebay aren't usually genuine hardware and won't work
+  * Example: cheap "new" LSI 9211-8i HBA's from China on ebay aren't usually genuine hardware and may have issues
   * Serial number might not be valid, so ask for serial number to confirm genuine product from manufacturer
 
 ## SAS Controllers
@@ -138,6 +138,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some controller's firmware may be incompatible with operating system or operating system's version
 * Cable might be faulty
 * Cable going to expander or backplane might be wrong type
+* Controller may be overheating
 
 ## SAS Expanders
 * Some expanders may be limiting hard drive sizes to for example 2 TB max
@@ -150,6 +151,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Some expanders may not support double bandwidth (two cables from expander to controller) if the controller's manufacturer is not the same as expanders
 * Cable might be faulty
 * Cable going to backplane or controller might be wrong type
+* Expander may be overheating
 
 ## Backplanes
 * Backplane may not receive enough power from PSU's power rail
@@ -164,6 +166,7 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
   * Example: Samsung HD155UI and HD204UI drive writes corrupted data to the disk if SMART data is being read at the same time
 * Drives are connected to backplane so that controller or expander failure can corrupt the whole pool
 * Drives that have been spinning for years may not be able to start spinning again
+* Drive may be overheating
 
 ## Operating system
 * OS may have driver bug for SAS controller
