@@ -10,7 +10,7 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 * ZFS as filesystem
 * FreeBSD as operating system
 * RaidZ2 (aka RAID6) (2 drives can fail) or RaidZ3 (3 drives can fail)
-* ECC memory only
+* ECC RAM used to eliminate point of failure and finding memory errors  
 * Redundant power supply
 * Multiple SAS controllers against data loss
 * Rack mount case with 24 x 3.5" bays
@@ -29,7 +29,6 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 
 # Hardware hazards
 * Cheap components
-* Not using ECC memory
 * PSU failure
 * Motherboard failure
 * Cheap SAS cables
@@ -53,7 +52,6 @@ How to build your own NAS for home use which doesn't break immediately? What typ
 # Hardware setup
 * Motherboard
 * ECC RAM
-  * Use 1 GB of RAM per 1 TB of storage space
 * 3 (or more) x SAS expander cards (1 x MiniSAS port for backplane which has 4 slots for SAS/SATA HDDs)
   * RAID6 can lose 2 HDDs
   * Each drive are in different zpool per backplane so there are 4 different zpools or vdevs
@@ -125,6 +123,10 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Product is not genuine
   * Example: cheap "new" LSI 9211-8i HBA's from China on ebay aren't usually genuine hardware and may have issues
   * Serial number might not be valid, so ask for serial number to confirm genuine product from manufacturer
+* Wrong kind of product
+  * SAS breakout cables used for drives and controller looks alike but are different
+    * Forward breakout cable for connecting SATA connectors to drives
+    * Reverse breakout cable for connecting SATA connectors to SAS controller     
 
 ## SAS Controllers
 * Some controllers may be limiting hard drive sizes to for example 2 TB max
