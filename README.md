@@ -179,6 +179,8 @@ All modern hard drives contains caching. Almost all hard drive manufacturers bui
 * Drives that have been spinning for years may not be able to start spinning again after spin down
 * Drive may be overheating
 * Rarely brand new drive might die after just a few days or hours or not work at all
+* Some drives may have different sector counts
+  * Example: replacing failed 2 TB drive with new 2 TB drive from different manufacturer fails because it has less sectors than rest of the drives    
 
 ## Operating system
 * OS may have driver bug for SAS controller
